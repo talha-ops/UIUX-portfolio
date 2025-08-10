@@ -739,7 +739,7 @@ body::after {
 .status-dot {
     width: 8px;
     height: 8px;
-    background: #e5e5e5;
+    background: #4CAF50;
     border-radius: 50%;
     animation: pulse 2s infinite;
 }
