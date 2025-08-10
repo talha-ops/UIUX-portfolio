@@ -7,6 +7,7 @@ const useStarSystem = () => {
   const animationRef = useRef(null);
   const isMovingRef = useRef(false);
   const moveTimeoutRef = useRef(null);
+  const lastFrameTimeRef = useRef(0);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -22,23 +23,14 @@ const useStarSystem = () => {
       // Add star type classes
       star.className = `unified-star ${type}-star`;
       
-      // Add color variations for some star types
-      if (type === 'background' || type === 'floating') {
-        const colors = ['', 'blue-star', 'purple-star', 'green-star'];
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        if (randomColor) {
-          star.classList.add(randomColor);
-        }
-      }
-      
       // Random star properties
       let size, opacity;
       if (type === 'shooting') {
-        size = Math.random() * 3 + 2; // 2-5px for shooting stars
-        opacity = 1; // Full opacity for shooting stars
+        size = Math.random() * 2 + 1; // 1-3px for shooting stars
+        opacity = 0.8;
       } else {
-        size = Math.random() * 4 + 1; // 1-5px
-        opacity = Math.random() * 0.9 + 0.1; // 0.1-1.0
+        size = Math.random() * 2 + 0.5; // 0.5-2.5px
+        opacity = Math.random() * 0.6 + 0.2; // 0.2-0.8
       }
       
       star.style.width = `${size}px`;
@@ -58,10 +50,6 @@ const useStarSystem = () => {
         star.style.left = `${Math.random() * window.innerWidth}px`;
         star.style.top = `${Math.random() * window.innerHeight}px`;
         star.style.zIndex = '5';
-      } else if (type === 'twinkling') {
-        star.style.left = `${Math.random() * window.innerWidth}px`;
-        star.style.top = `${Math.random() * window.innerHeight}px`;
-        star.style.zIndex = '3';
       } else if (type === 'shooting') {
         const edge = Math.floor(Math.random() * 4);
         switch (edge) {
@@ -94,108 +82,85 @@ const useStarSystem = () => {
         size: size,
         baseOpacity: opacity,
         pulsePhase: Math.random() * Math.PI * 2,
-        pulseSpeed: 0.01 + Math.random() * 0.03
+        pulseSpeed: 0.005 + Math.random() * 0.01 // Reduced speed
       };
       
       if (type === 'cursor') {
-        starData.offsetX = (Math.random() - 0.5) * 300;
-        starData.offsetY = (Math.random() - 0.5) * 300;
-        starData.speed = 0.03 + Math.random() * 0.07;
+        starData.offsetX = (Math.random() - 0.5) * 200; // Reduced range
+        starData.offsetY = (Math.random() - 0.5) * 200;
+        starData.speed = 0.02 + Math.random() * 0.03; // Reduced speed
         starData.angle = Math.random() * Math.PI * 2;
-        starData.rotationSpeed = (Math.random() - 0.5) * 0.02;
-        starData.distance = 20 + Math.random() * 150;
+        starData.distance = 15 + Math.random() * 100; // Reduced distance
       } else if (type === 'floating') {
-        starData.parallaxSpeed = 0.1 + Math.random() * 0.3;
-        starData.floatRange = 20 + Math.random() * 40;
-        starData.floatSpeed = 0.005 + Math.random() * 0.01;
+        starData.parallaxSpeed = 0.05 + Math.random() * 0.1; // Reduced speed
+        starData.floatRange = 10 + Math.random() * 20; // Reduced range
+        starData.floatSpeed = 0.003 + Math.random() * 0.005; // Reduced speed
       } else if (type === 'shooting') {
-        starData.velocityX = (Math.random() - 0.5) * 8 + 4;
-        starData.velocityY = (Math.random() - 0.5) * 8 + 4;
+        starData.velocityX = (Math.random() - 0.5) * 4 + 2; // Reduced velocity
+        starData.velocityY = (Math.random() - 0.5) * 4 + 2;
         starData.life = 0;
-        starData.maxLife = Math.random() * 100 + 50;
-        starData.trail = [];
-        starData.trailLength = 8;
-      } else if (type === 'twinkling') {
-        starData.twinkleSpeed = 0.02 + Math.random() * 0.04;
-        starData.twinkleIntensity = 0.3 + Math.random() * 0.4;
+        starData.maxLife = Math.random() * 60 + 30; // Reduced life
+        starData.trailLength = 4; // Reduced trail length
       }
       
       starsRef.current.push(starData);
     };
 
     const createStars = () => {
+      // Significantly reduced star counts for better performance
       // Create background stars
-      for (let i = 0; i < 70; i++) {
+      for (let i = 0; i < 25; i++) { // Reduced from 70
         createStar('background');
       }
       
       // Create cursor-following stars
-      for (let i = 0; i < 40; i++) {
+      for (let i = 0; i < 15; i++) { // Reduced from 40
         createStar('cursor');
       }
       
       // Create floating parallax stars
-      for (let i = 0; i < 25; i++) {
+      for (let i = 0; i < 10; i++) { // Reduced from 25
         createStar('floating');
       }
       
-      // Create twinkling stars
-      for (let i = 0; i < 10; i++) {
-        createStar('twinkling');
-      }
-      
       // Create shooting stars
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 3; i++) { // Reduced from 5
         createStar('shooting');
       }
     };
 
     const animateBackgroundStar = (star, moveX, moveY) => {
-      const parallaxX = moveX * 0.5;
-      const parallaxY = moveY * 0.5;
+      const parallaxX = moveX * 0.3; // Reduced parallax effect
+      const parallaxY = moveY * 0.3;
       
       star.element.style.transform = `translate(${parallaxX}px, ${parallaxY}px)`;
       
+      // Simplified pulse effect
       star.pulsePhase += star.pulseSpeed;
-      const pulseOpacity = star.baseOpacity + Math.sin(star.pulsePhase) * 0.2;
+      const pulseOpacity = star.baseOpacity + Math.sin(star.pulsePhase) * 0.1; // Reduced pulse
       star.element.style.opacity = Math.max(0.1, pulseOpacity);
-      
-      star.element.style.boxShadow = `0 0 ${3 + Math.sin(star.pulsePhase) * 2}px rgba(255, 255, 255, 0.3)`;
     };
 
     const animateCursorStar = (star, speed) => {
-      if (speed > 0.1) {
-        star.angle += star.rotationSpeed + (speed * 0.0008);
-      }
-      
-      const targetX = mouseRef.current.x + Math.cos(star.angle) * star.distance + star.offsetX;
-      const targetY = mouseRef.current.y + Math.sin(star.angle) * star.distance + star.offsetY;
-      
-      const currentX = parseFloat(star.element.style.left) || mouseRef.current.x;
-      const currentY = parseFloat(star.element.style.top) || mouseRef.current.y;
-      
-      const newX = currentX + (targetX - currentX) * star.speed;
-      const newY = currentY + (targetY - currentY) * star.speed;
-      
-      star.element.style.left = `${newX}px`;
-      star.element.style.top = `${newY}px`;
-      
-      if (isMovingRef.current) {
-        star.pulsePhase += star.pulseSpeed;
-        const pulseScale = 1 + Math.sin(star.pulsePhase) * 0.4;
-        star.element.style.transform = `scale(${pulseScale})`;
+      if (speed > 0.05) { // Reduced speed threshold
+        const targetX = mouseRef.current.x + Math.cos(star.angle) * star.distance + star.offsetX;
+        const targetY = mouseRef.current.y + Math.sin(star.angle) * star.distance + star.offsetY;
         
-        const opacity = Math.min(1, 0.4 + (speed * 0.015));
-        star.element.style.opacity = opacity;
+        const currentX = parseFloat(star.element.style.left) || mouseRef.current.x;
+        const currentY = parseFloat(star.element.style.top) || mouseRef.current.y;
         
-        const intensity = Math.min(255, 120 + speed * 2.5);
-        star.element.style.background = `rgb(${intensity}, ${intensity}, ${intensity})`;
-        star.element.style.boxShadow = `0 0 ${12 + speed * 0.6}px rgba(${intensity}, ${intensity}, ${intensity}, 0.9)`;
-      } else {
-        star.element.style.transform = 'scale(1)';
-        star.element.style.opacity = star.baseOpacity;
-        star.element.style.background = '#ffffff';
-        star.element.style.boxShadow = '0 0 10px rgba(255, 255, 255, 0.8)';
+        const newX = currentX + (targetX - currentX) * star.speed;
+        const newY = currentY + (targetY - currentY) * star.speed;
+        
+        star.element.style.left = `${newX}px`;
+        star.element.style.top = `${newY}px`;
+        
+        if (isMovingRef.current) {
+          const opacity = Math.min(1, 0.3 + (speed * 0.01)); // Reduced opacity change
+          star.element.style.opacity = opacity;
+        } else {
+          star.element.style.opacity = star.baseOpacity;
+        }
       }
     };
 
@@ -207,27 +172,6 @@ const useStarSystem = () => {
       const floatY = Math.sin(star.pulsePhase) * star.floatRange;
       
       star.element.style.transform = `translate(${parallaxX}px, ${parallaxY + floatY}px)`;
-      
-      const pulseOpacity = star.baseOpacity + Math.sin(star.pulsePhase * 2) * 0.1;
-      star.element.style.opacity = pulseOpacity;
-    };
-
-    const animateTwinklingStar = (star, moveX, moveY) => {
-      const parallaxX = moveX * 0.05;
-      const parallaxY = moveY * 0.05;
-      
-      star.pulsePhase += star.twinkleSpeed;
-      const twinkleOpacity = star.baseOpacity + Math.sin(star.pulsePhase) * star.twinkleIntensity;
-      const twinkleScale = 0.8 + Math.sin(star.pulsePhase * 1.5) * 0.6;
-      
-      star.element.style.transform = `translate(${parallaxX}px, ${parallaxY}px) scale(${twinkleScale})`;
-      star.element.style.opacity = Math.max(0.1, twinkleOpacity);
-      
-      if (Math.random() < 0.01) {
-        star.element.style.boxShadow = `0 0 20px rgba(255, 255, 255, ${twinkleOpacity})`;
-      } else {
-        star.element.style.boxShadow = `0 0 10px rgba(255, 255, 255, ${twinkleOpacity * 0.5})`;
-      }
     };
 
     const animateShootingStar = (star) => {
@@ -239,20 +183,6 @@ const useStarSystem = () => {
       
       star.element.style.left = `${newX}px`;
       star.element.style.top = `${newY}px`;
-      
-      star.trail.push({ x: newX, y: newY });
-      if (star.trail.length > star.trailLength) {
-        star.trail.shift();
-      }
-      
-      let trailShadow = '';
-      star.trail.forEach((point, index) => {
-        const alpha = (index + 1) / star.trail.length * 0.8;
-        const size = (index + 1) / star.trail.length * 15;
-        if (index > 0) trailShadow += ', ';
-        trailShadow += `${point.x - newX}px ${point.y - newY}px ${size}px rgba(255, 255, 255, ${alpha})`;
-      });
-      star.element.style.boxShadow = trailShadow;
       
       star.life++;
       const lifeProgress = star.life / star.maxLife;
@@ -268,21 +198,29 @@ const useStarSystem = () => {
           starsRef.current.splice(index, 1);
         }
         
+        // Reduced frequency of new shooting stars
         setTimeout(() => {
           createStar('shooting');
-        }, Math.random() * 5000 + 3000);
+        }, Math.random() * 8000 + 5000);
       }
     };
 
-    const animate = () => {
+    const animate = (currentTime) => {
+      // Throttle animation to 30 FPS for better performance
+      if (currentTime - lastFrameTimeRef.current < 33) { // ~30 FPS
+        animationRef.current = requestAnimationFrame(animate);
+        return;
+      }
+      lastFrameTimeRef.current = currentTime;
+
       const deltaX = mouseRef.current.x - mouseRef.current.prevX;
       const deltaY = mouseRef.current.y - mouseRef.current.prevY;
       const speed = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
       
       const centerX = window.innerWidth / 2;
       const centerY = window.innerHeight / 2;
-      const moveX = (mouseRef.current.x - centerX) * 0.03;
-      const moveY = (mouseRef.current.y - centerY) * 0.03;
+      const moveX = (mouseRef.current.x - centerX) * 0.02; // Reduced movement
+      const moveY = (mouseRef.current.y - centerY) * 0.02;
       
       starsRef.current.forEach((star) => {
         switch (star.type) {
@@ -294,9 +232,6 @@ const useStarSystem = () => {
             break;
           case 'floating':
             animateFloatingStar(star, moveX, moveY);
-            break;
-          case 'twinkling':
-            animateTwinklingStar(star, moveX, moveY);
             break;
           case 'shooting':
             animateShootingStar(star);
@@ -321,7 +256,7 @@ const useStarSystem = () => {
       
       moveTimeoutRef.current = setTimeout(() => {
         isMovingRef.current = false;
-      }, 100);
+      }, 150); // Increased timeout
     };
 
     const handleResize = () => {
@@ -335,70 +270,13 @@ const useStarSystem = () => {
       });
     };
 
-    // Create spectacular shooting stars
-    const createSpectacularShootingStars = () => {
-      if (Math.random() < 0.3) {
-        const spectacularStar = document.createElement('div');
-        spectacularStar.className = 'unified-star shooting-star spectacular-shooting-star';
-        spectacularStar.style.width = '4px';
-        spectacularStar.style.height = '4px';
-        spectacularStar.style.background = '#ffffff';
-        spectacularStar.style.borderRadius = '50%';
-        spectacularStar.style.position = 'absolute';
-        spectacularStar.style.zIndex = '6';
-        
-        const edge = Math.floor(Math.random() * 4);
-        switch (edge) {
-          case 0:
-            spectacularStar.style.left = '-50px';
-            spectacularStar.style.top = '-50px';
-            break;
-          case 1:
-            spectacularStar.style.left = `${window.innerWidth + 50}px`;
-            spectacularStar.style.top = '-50px';
-            break;
-          case 2:
-            spectacularStar.style.left = '-50px';
-            spectacularStar.style.top = `${window.innerHeight + 50}px`;
-            break;
-          case 3:
-            spectacularStar.style.left = `${window.innerWidth + 50}px`;
-            spectacularStar.style.top = `${window.innerHeight + 50}px`;
-            break;
-        }
-        
-        container.appendChild(spectacularStar);
-        
-        const targetX = edge === 1 || edge === 3 ? -200 : window.innerWidth + 200;
-        const targetY = edge === 0 || edge === 1 ? window.innerHeight + 200 : -200;
-        
-        spectacularStar.style.transition = 'all 2s linear';
-        spectacularStar.style.boxShadow = '0 0 30px rgba(255, 255, 255, 0.9)';
-        
-        setTimeout(() => {
-          spectacularStar.style.left = `${targetX}px`;
-          spectacularStar.style.top = `${targetY}px`;
-          spectacularStar.style.opacity = '0';
-        }, 100);
-        
-        setTimeout(() => {
-          if (spectacularStar.parentNode) {
-            spectacularStar.parentNode.removeChild(spectacularStar);
-          }
-        }, 2500);
-      }
-    };
-
     // Initialize
     createStars();
-    animate();
+    animate(0);
 
     // Event listeners
-    document.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('resize', handleResize);
-    
-    // Spectacular shooting stars interval
-    const spectacularInterval = setInterval(createSpectacularShootingStars, 8000);
+    document.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('resize', handleResize, { passive: true });
 
     // Cleanup
     return () => {
@@ -407,7 +285,6 @@ const useStarSystem = () => {
       }
       document.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
-      clearInterval(spectacularInterval);
       if (moveTimeoutRef.current) {
         clearTimeout(moveTimeoutRef.current);
       }

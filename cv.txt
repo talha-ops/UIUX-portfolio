@@ -1,0 +1,81 @@
+MUHAMMAD TALHA FIAZ
+Creative Developer & Designer
+=====================================
+
+CONTACT INFORMATION
+-------------------
+Email: talha.fiaz@email.com
+Phone: +1 (555) 123-4567
+Location: San Francisco, CA
+LinkedIn: linkedin.com/in/talhafiaz
+GitHub: github.com/talhafiaz
+
+PROFESSIONAL SUMMARY
+--------------------
+Creative developer with 5+ years of experience building digital products that people love. 
+Combines technical expertise with design thinking to create solutions that are both beautiful 
+and functional. Passionate about creating meaningful digital experiences and pushing the 
+boundaries of what's possible on the web.
+
+TECHNICAL SKILLS
+----------------
+Frontend: React, Vue.js, TypeScript, Next.js, Tailwind CSS
+Backend: Node.js, Python, PostgreSQL, MongoDB, GraphQL
+Tools: Git, Docker, AWS, Figma, Framer
+Mobile: React Native, Expo
+
+EXPERIENCE
+----------
+Senior Frontend Developer | TechCorp | 2022-Present
+• Led development of customer-facing applications using React and TypeScript
+• Improved application performance by 40% through optimization techniques
+• Mentored junior developers and conducted code reviews
+
+Full Stack Developer | StartupXYZ | 2020-2022
+• Built and maintained multiple web applications using Node.js and React
+• Implemented CI/CD pipelines and automated testing
+• Collaborated with design team to ensure pixel-perfect implementations
+
+Frontend Developer | WebSolutions | 2019-2020
+• Developed responsive web interfaces using modern JavaScript frameworks
+• Worked with REST APIs and implemented state management solutions
+• Participated in agile development processes
+
+PROJECTS
+---------
+EcoShop Platform
+• Sustainable e-commerce platform with advanced filtering and real-time inventory
+• Tech: React, Node.js, MongoDB, Stripe
+
+AI Task Manager
+• Intelligent task management with AI-powered prioritization
+• Tech: Vue.js, Python, TensorFlow, Chart.js
+
+FitTrack Mobile
+• Cross-platform fitness tracking app with social features
+• Tech: React Native, Firebase, Redux, Expo
+
+EDUCATION
+----------
+Bachelor of Computer Science | University of Technology | 2019
+• GPA: 3.8/4.0
+• Relevant coursework: Web Development, Database Systems, Software Engineering
+
+CERTIFICATIONS
+--------------
+AWS Certified Developer Associate
+Google Cloud Professional Developer
+React Developer Certification
+
+LANGUAGES
+---------
+English (Native)
+Urdu (Fluent)
+Arabic (Conversational)
+
+INTERESTS
+---------
+Open Source Contribution
+UI/UX Design
+Machine Learning
+Sustainable Technology

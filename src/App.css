@@ -26,7 +26,7 @@ body {
     padding: 0 0.8rem;
 }
 
-/* Unified Star System - Merges Hero Background Stars with Cursor Stars */
+/* Unified Star System - Optimized for Performance */
 #cursorStars {
     position: fixed;
     top: 0;
@@ -37,65 +37,43 @@ body {
     z-index: 9999;
 }
 
-/* Base star styles */
+/* Base star styles - Optimized */
 .unified-star {
     position: absolute;
     background: #ffffff;
     border-radius: 50%;
     pointer-events: none;
-    will-change: transform, opacity;
+    will-change: transform;
+    transform: translateZ(0); /* Hardware acceleration */
 }
 
 /* Background stars - subtle, hero background effect */
 .background-star {
     z-index: 1;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
-    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+    box-shadow: 0 0 3px rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease-out;
 }
 
 /* Cursor stars - dynamic, following mouse */
 .cursor-star {
     z-index: 10;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
-    transition: all 0.2s ease-out;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+    transition: transform 0.15s ease-out;
 }
 
 /* Floating stars - parallax effect */
 .floating-star {
     z-index: 5;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
-    transition: transform 0.5s ease-out, opacity 0.3s ease-out;
-}
-
-/* Twinkling stars */
-.twinkling-star {
-    z-index: 3;
-    animation: twinkle 3s ease-in-out infinite;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
+    transition: transform 0.3s ease-out;
 }
 
 /* Shooting stars */
 .shooting-star {
     z-index: 4;
-    background: linear-gradient(45deg, #ffffff, rgba(255, 255, 255, 0.8));
+    background: #ffffff;
     border-radius: 50%;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
-}
-
-/* Spectacular shooting stars */
-.spectacular-shooting-star {
-    z-index: 6;
-    background: radial-gradient(circle, #ffffff 0%, rgba(255, 255, 255, 0.8) 50%, transparent 100%);
-    box-shadow: 
-        0 0 30px rgba(255, 255, 255, 0.9),
-        0 0 60px rgba(100, 255, 218, 0.6),
-        0 0 90px rgba(100, 255, 218, 0.3);
-}
-
-/* Colored stars for variety */
-.blue-star {
-    background: #64b5f6;
-    box-shadow: 0 0 8px rgba(100, 181, 246, 0.8);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
 }
 
 .purple-star {
@@ -108,18 +86,7 @@ body {
     box-shadow: 0 0 8px rgba(129, 199, 132, 0.8);
 }
 
-@keyframes twinkle {
-    0%, 100% {
-        opacity: 0.3;
-        transform: scale(0.8);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1.2);
-    }
-}
-
-/* Legacy cursor-star class for backward compatibility */
+/* Optimized cursor star effect */
 .cursor-star::before {
     content: '';
     position: absolute;
@@ -127,24 +94,28 @@ body {
     left: 50%;
     width: 100%;
     height: 100%;
-    background: inherit;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
     border-radius: inherit;
     transform: translate(-50%, -50%) scale(0);
-    animation: starPulse 2s infinite;
+    animation: starPulse 1.5s ease-in-out infinite;
 }
 
 @keyframes starPulse {
     0% {
         transform: translate(-50%, -50%) scale(0);
-        opacity: 1;
+        opacity: 0.6;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0.3;
     }
     100% {
-        transform: translate(-50%, -50%) scale(3);
+        transform: translate(-50%, -50%) scale(2.5);
         opacity: 0;
     }
 }
 
-/* Galaxy Background */
+/* Galaxy Background - Optimized */
 body::before {
     content: '';
     position: fixed;
@@ -153,18 +124,15 @@ body::before {
     width: 100%;
     height: 100%;
     background: 
-        radial-gradient(ellipse at 20% 30%, rgba(147, 51, 234, 0.4) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 70%, rgba(236, 72, 153, 0.35) 0%, transparent 60%),
-        radial-gradient(ellipse at 40% 80%, rgba(251, 146, 60, 0.3) 0%, transparent 60%),
-        radial-gradient(ellipse at 90% 20%, rgba(168, 85, 247, 0.3) 0%, transparent 60%),
-        radial-gradient(ellipse at 60% 40%, rgba(244, 114, 182, 0.2) 0%, transparent 70%),
-        radial-gradient(ellipse at 15% 70%, rgba(139, 69, 19, 0.25) 0%, transparent 65%),
-        linear-gradient(135deg, #000000 0%, #1a0a1a 15%, #2a0a2a 30%, #3a1a2a 45%, #2a1a3a 60%, #1a0a2a 75%, #000000 100%);
+        radial-gradient(ellipse at 20% 30%, rgba(147, 51, 234, 0.3) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 70%, rgba(236, 72, 153, 0.25) 0%, transparent 60%),
+        radial-gradient(ellipse at 40% 80%, rgba(251, 146, 60, 0.2) 0%, transparent 60%),
+        linear-gradient(135deg, #000000 0%, #1a0a1a 30%, #2a0a2a 60%, #000000 100%);
     z-index: -3;
-    animation: galaxyColorShift 30s ease-in-out infinite, galaxyFloat 20s ease-in-out infinite;
+    animation: galaxyColorShift 40s ease-in-out infinite;
 }
 
-/* Nebula Clouds */
+/* Nebula Clouds - Optimized */
 body::after {
     content: '';
     position: fixed;
@@ -173,33 +141,28 @@ body::after {
     width: 100%;
     height: 100%;
     background: 
-        radial-gradient(circle at 25% 25%, rgba(186, 85, 211, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 75% 75%, rgba(255, 20, 147, 0.12) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(255, 140, 0, 0.1) 0%, transparent 70%),
-        radial-gradient(circle at 10% 80%, rgba(138, 43, 226, 0.08) 0%, transparent 60%),
-        radial-gradient(circle at 90% 10%, rgba(255, 105, 180, 0.08) 0%, transparent 60%),
-        radial-gradient(circle at 35% 65%, rgba(218, 112, 214, 0.06) 0%, transparent 65%),
-        radial-gradient(circle at 70% 30%, rgba(255, 69, 0, 0.07) 0%, transparent 55%);
+        radial-gradient(circle at 25% 25%, rgba(186, 85, 211, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(255, 20, 147, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(255, 140, 0, 0.06) 0%, transparent 70%);
     z-index: -2;
-    animation: nebulaColorShift 25s ease-in-out infinite, nebulaDrift 35s ease-in-out infinite;
+    animation: nebulaColorShift 35s ease-in-out infinite;
 }
 
-/* Moon */
+/* Moon - Optimized */
 .moon {
     position: fixed;
     top: 80px;
     right: 100px;
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
     background: radial-gradient(circle at 30% 30%, #ffffff 0%, #f0f0f0 40%, #e5e5e5 70%, #d0d0d0 100%);
     border-radius: 50%;
     z-index: -1;
     box-shadow: 
-        0 0 80px rgba(255, 255, 255, 0.4),
-        0 0 150px rgba(255, 255, 255, 0.2),
-        0 0 200px rgba(229, 229, 229, 0.15),
-        inset -15px -15px 40px rgba(0, 0, 0, 0.2);
-    animation: moonGlow 8s ease-in-out infinite;
+        0 0 60px rgba(255, 255, 255, 0.3),
+        0 0 100px rgba(255, 255, 255, 0.15),
+        inset -10px -10px 30px rgba(0, 0, 0, 0.2);
+    animation: moonGlow 12s ease-in-out infinite;
 }
 
 /* Moon craters for realistic effect */
@@ -262,71 +225,61 @@ body::after {
 .planet-1 {
     top: 15%;
     left: 8%;
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     background: 
-        radial-gradient(circle at 30% 30%, rgba(255, 100, 150, 0.9) 0%, rgba(200, 50, 100, 0.7) 40%, rgba(150, 20, 80, 0.5) 100%);
-    box-shadow: 
-        0 0 40px rgba(255, 100, 150, 0.4),
-        0 0 80px rgba(255, 100, 150, 0.2),
-        inset -8px -8px 20px rgba(0, 0, 0, 0.3);
-    animation: planetFloat1 25s ease-in-out infinite, planetColorShift1 20s ease-in-out infinite;
+        radial-gradient(circle at 30% 30%, rgba(169, 169, 169, 0.6) 0%, rgba(128, 128, 128, 0.4) 60%, rgba(105, 105, 105, 0.2) 100%);
+    box-shadow: 0 0 20px rgba(169, 169, 169, 0.2);
+    animation: planetFloat1 30s ease-in-out infinite;
+    transform: translateZ(0);
 }
 
 .planet-2 {
     top: 40%;
     right: 12%;
-    width: 120px;
-    height: 120px;
+    width: 90px;
+    height: 90px;
     background: 
-        radial-gradient(circle at 25% 25%, rgba(147, 51, 234, 0.9) 0%, rgba(120, 30, 180, 0.7) 40%, rgba(80, 20, 120, 0.5) 100%);
-    box-shadow: 
-        0 0 60px rgba(147, 51, 234, 0.4),
-        0 0 120px rgba(147, 51, 234, 0.2),
-        inset -10px -10px 25px rgba(0, 0, 0, 0.3);
-    animation: planetFloat2 30s ease-in-out infinite reverse, planetColorShift2 22s ease-in-out infinite;
+        radial-gradient(circle at 25% 25%, rgba(192, 192, 192, 0.5) 0%, rgba(160, 160, 160, 0.3) 60%, rgba(128, 128, 128, 0.1) 100%);
+    box-shadow: 0 0 25px rgba(192, 192, 192, 0.15);
+    animation: planetFloat2 35s ease-in-out infinite reverse;
+    transform: translateZ(0);
 }
 
 .planet-3 {
     bottom: 25%;
     left: 15%;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     background: 
-        radial-gradient(circle at 35% 35%, rgba(255, 140, 0, 0.9) 0%, rgba(200, 100, 20, 0.7) 40%, rgba(150, 60, 10, 0.5) 100%);
-    box-shadow: 
-        0 0 35px rgba(255, 140, 0, 0.4),
-        0 0 70px rgba(255, 140, 0, 0.2),
-        inset -6px -6px 15px rgba(0, 0, 0, 0.3);
-    animation: planetFloat3 22s ease-in-out infinite, planetColorShift3 18s ease-in-out infinite;
+        radial-gradient(circle at 35% 35%, rgba(211, 211, 211, 0.4) 0%, rgba(176, 176, 176, 0.2) 70%, rgba(144, 144, 144, 0.1) 100%);
+    box-shadow: 0 0 15px rgba(211, 211, 211, 0.1);
+    animation: planetFloat3 40s ease-in-out infinite;
+    transform: translateZ(0);
 }
 
 .planet-4 {
     top: 60%;
     right: 25%;
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     background: 
-        radial-gradient(circle at 40% 40%, rgba(218, 112, 214, 0.9) 0%, rgba(180, 80, 170, 0.7) 40%, rgba(140, 50, 130, 0.5) 100%);
-    box-shadow: 
-        0 0 25px rgba(218, 112, 214, 0.4),
-        0 0 50px rgba(218, 112, 214, 0.2),
-        inset -4px -4px 12px rgba(0, 0, 0, 0.3);
-    animation: planetFloat4 18s ease-in-out infinite, planetColorShift4 16s ease-in-out infinite;
+        radial-gradient(circle at 40% 40%, rgba(200, 200, 200, 0.4) 0%, rgba(170, 170, 170, 0.2) 70%, rgba(140, 140, 140, 0.1) 100%);
+    box-shadow: 0 0 12px rgba(200, 200, 200, 0.1);
+    animation: planetFloat4 45s ease-in-out infinite;
+    transform: translateZ(0);
 }
 
 .planet-5 {
     top: 20%;
     right: 40%;
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     background: 
-        radial-gradient(circle at 30% 30%, rgba(255, 69, 0, 0.9) 0%, rgba(200, 50, 20, 0.7) 40%, rgba(150, 30, 10, 0.5) 100%);
-    box-shadow: 
-        0 0 20px rgba(255, 69, 0, 0.4),
-        0 0 40px rgba(255, 69, 0, 0.2),
-        inset -3px -3px 10px rgba(0, 0, 0, 0.3);
-    animation: planetFloat5 20s ease-in-out infinite reverse, planetColorShift5 24s ease-in-out infinite;
+        radial-gradient(circle at 30% 30%, rgba(180, 180, 180, 0.4) 0%, rgba(150, 150, 150, 0.2) 70%, rgba(120, 120, 120, 0.1) 100%);
+    box-shadow: 0 0 10px rgba(180, 180, 180, 0.1);
+    animation: planetFloat5 50s ease-in-out infinite reverse;
+    transform: translateZ(0);
 }
 
 /* Planet Animations */
@@ -393,152 +346,60 @@ body::after {
 
 @keyframes planetFloat1 {
     0%, 100% {
-        transform: translateY(0px) translateX(0px) rotate(0deg);
-    }
-    25% {
-        transform: translateY(-15px) translateX(8px) rotate(90deg);
+        transform: translateY(0px);
     }
     50% {
-        transform: translateY(-25px) translateX(0px) rotate(180deg);
-    }
-    75% {
-        transform: translateY(-15px) translateX(-8px) rotate(270deg);
+        transform: translateY(-8px);
     }
 }
 
 @keyframes planetFloat2 {
     0%, 100% {
-        transform: translateY(0px) translateX(0px) rotate(0deg);
+        transform: translateY(0px);
     }
-    33% {
-        transform: translateY(-20px) translateX(-12px) rotate(120deg);
-    }
-    66% {
-        transform: translateY(10px) translateX(5px) rotate(240deg);
+    50% {
+        transform: translateY(-10px);
     }
 }
 
 @keyframes planetFloat3 {
     0%, 100% {
-        transform: translateY(0px) translateX(0px) rotate(0deg);
+        transform: translateY(0px);
     }
-    40% {
-        transform: translateY(-18px) translateX(10px) rotate(144deg);
-    }
-    80% {
-        transform: translateY(8px) translateX(-6px) rotate(288deg);
+    50% {
+        transform: translateY(-6px);
     }
 }
 
 @keyframes planetFloat4 {
     0%, 100% {
-        transform: translateY(0px) translateX(0px) rotate(0deg);
+        transform: translateY(0px);
     }
-    30% {
-        transform: translateY(-12px) translateX(-8px) rotate(108deg);
-    }
-    60% {
-        transform: translateY(5px) translateX(12px) rotate(216deg);
+    50% {
+        transform: translateY(-5px);
     }
 }
 
 @keyframes planetFloat5 {
     0%, 100% {
-        transform: translateY(0px) translateX(0px) rotate(0deg);
+        transform: translateY(0px);
     }
     50% {
-        transform: translateY(-10px) translateX(-5px) rotate(180deg);
+        transform: translateY(-4px);
     }
 }
 
-/* Planet Color Shift Animations */
-@keyframes planetColorShift1 {
-    0% {
-        filter: hue-rotate(0deg) saturate(1.2) brightness(1);
-    }
-    33% {
-        filter: hue-rotate(120deg) saturate(1.4) brightness(1.1);
-    }
-    66% {
-        filter: hue-rotate(240deg) saturate(1.1) brightness(0.9);
-    }
-    100% {
-        filter: hue-rotate(360deg) saturate(1.2) brightness(1);
-    }
-}
-
-@keyframes planetColorShift2 {
-    0% {
-        filter: hue-rotate(60deg) saturate(1.1) brightness(1);
-    }
-    25% {
-        filter: hue-rotate(150deg) saturate(1.3) brightness(1.2);
-    }
-    50% {
-        filter: hue-rotate(240deg) saturate(1.2) brightness(0.8);
-    }
-    75% {
-        filter: hue-rotate(330deg) saturate(1.4) brightness(1.1);
-    }
-    100% {
-        filter: hue-rotate(420deg) saturate(1.1) brightness(1);
-    }
-}
-
-@keyframes planetColorShift3 {
-    0% {
-        filter: hue-rotate(30deg) saturate(1.3) brightness(1);
-    }
-    40% {
-        filter: hue-rotate(180deg) saturate(1.1) brightness(1.2);
-    }
-    80% {
-        filter: hue-rotate(300deg) saturate(1.4) brightness(0.9);
-    }
-    100% {
-        filter: hue-rotate(390deg) saturate(1.3) brightness(1);
-    }
-}
-
-@keyframes planetColorShift4 {
-    0% {
-        filter: hue-rotate(90deg) saturate(1.2) brightness(1);
-    }
-    50% {
-        filter: hue-rotate(270deg) saturate(1.3) brightness(1.1);
-    }
-    100% {
-        filter: hue-rotate(450deg) saturate(1.2) brightness(1);
-    }
-}
-
-@keyframes planetColorShift5 {
-    0% {
-        filter: hue-rotate(45deg) saturate(1.4) brightness(1);
-    }
-    30% {
-        filter: hue-rotate(165deg) saturate(1.2) brightness(1.2);
-    }
-    60% {
-        filter: hue-rotate(285deg) saturate(1.3) brightness(0.8);
-    }
-    100% {
-        filter: hue-rotate(405deg) saturate(1.4) brightness(1);
-    }
-}
+/* Planet animations optimized for performance */
 
 /* Navigation */
 .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(30px);
-    border-bottom: 1px solid rgba(229, 229, 229, 0.2);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
-    z-index: 1000;
-    transition: all 0.3s ease;
+    position: relative !important;
+    width: 100% !important;
+    background: transparent !important;
+    backdrop-filter: blur(10px) !important;
+    border-bottom: 1px solid rgba(229, 229, 229, 0.05) !important;
+    box-shadow: none !important;
+    transition: all 0.3s ease !important;
 }
 
 .nav-container {
@@ -549,6 +410,9 @@ body::after {
     justify-content: space-between;
     align-items: center;
     height: 50px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 15px 15px;
+    backdrop-filter: blur(5px);
 }
 
 .nav-logo a {
@@ -694,7 +558,7 @@ body::after {
 
 .title-line {
     display: block;
-    color: #8892b0;
+    color: #ffffff;
     font-size: 1rem;
     font-weight: 400;
     margin-bottom: 0.4rem;
@@ -727,7 +591,7 @@ body::after {
 
 .hero-description {
     font-size: 0.8rem;
-    color: #8892b0;
+    color: #ffffff;
     margin-bottom: 1.2rem;
     line-height: 1.6;
     max-width: 320px;
@@ -898,7 +762,7 @@ body::after {
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    color: #8892b0;
+    color: #ffffff;
     font-size: 0.9rem;
     z-index: 10; /* Ensure it's above other elements */
 }
@@ -939,7 +803,7 @@ section {
 
 .section-subtitle {
     font-size: 0.8rem;
-    color: #8892b0;
+    color: #ffffff;
     max-width: 360px;
     margin: 0 auto;
 }
@@ -966,7 +830,7 @@ section {
 
 .about-detail {
     font-size: 0.75rem;
-    color: #8892b0;
+    color: #ffffff;
     margin-bottom: 1rem;
     line-height: 1.6;
 }
@@ -1005,7 +869,7 @@ section {
 
 .stat-label {
     font-size: 0.9rem;
-    color: #8892b0;
+    color: #ffffff;
 }
 
 .about-skills h3 {
@@ -1346,7 +1210,7 @@ section {
 }
 
 .testimonial-company {
-    color: #8892b0;
+    color: #ffffff;
     font-size: 0.8rem;
     font-style: italic;
 }
@@ -1364,7 +1228,7 @@ section {
 }
 
 .testimonial-content {
-    color: #8892b0;
+    color: #ffffff;
     line-height: 1.6;
     font-size: 0.9rem;
     flex: 1;
@@ -1460,7 +1324,7 @@ section {
 }
 
 .contact-info p {
-    color: #8892b0;
+    color: #ffffff;
     margin-bottom: 1.5rem;
     line-height: 1.6;
     font-size: 0.9rem;
@@ -1475,7 +1339,7 @@ section {
     align-items: center;
     gap: 0.8rem;
     margin-bottom: 0.8rem;
-    color: #8892b0;
+    color: #ffffff;
     transition: color 0.3s ease;
     font-size: 0.9rem;
 }
@@ -1504,7 +1368,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #8892b0;
+    color: #ffffff;
     text-decoration: none;
     font-size: 1rem;
     transition: all 0.3s ease;
@@ -1561,7 +1425,7 @@ section {
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-    color: #8892b0;
+    color: #ffffff;
 }
 
 .form-group textarea {
@@ -1586,7 +1450,7 @@ section {
 }
 
 .footer-content p {
-    color: #8892b0;
+    color: #ffffff;
     font-size: 0.9rem;
 }
 
@@ -1596,7 +1460,7 @@ section {
 }
 
 .footer-links a {
-    color: #8892b0;
+    color: #ffffff;
     text-decoration: none;
     transition: color 0.3s ease;
     font-size: 0.9rem;
@@ -1645,18 +1509,19 @@ section {
     }
 
     .nav-menu {
-        position: fixed;
-        top: 80px;
-        left: -100%;
-        width: 100%;
-        height: calc(100vh - 80px);
-        background: rgba(10, 10, 10, 0.95);
-        backdrop-filter: blur(20px);
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        padding-top: 2rem;
-        transition: left 0.3s ease;
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        width: 100% !important;
+        background: transparent !important;
+        backdrop-filter: blur(10px) !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        padding-top: 1rem !important;
+        transition: all 0.3s ease !important;
+        border-top: none !important;
+        border-radius: 0 0 15px 15px;
     }
 
     .nav-menu.active {
