@@ -1513,20 +1513,20 @@ section {
         top: 50px !important;
         left: 0 !important;
         width: 100% !important;
-        background: rgba(0, 0, 0, 0.95) !important;
-        backdrop-filter: blur(15px) !important;
-        border-top: 1px solid rgba(229, 229, 229, 0.1) !important;
+        background: rgba(0, 0, 0, 0.98) !important;
+        backdrop-filter: blur(20px) !important;
+        border-top: 2px solid rgba(229, 229, 229, 0.3) !important;
         flex-direction: column !important;
         justify-content: flex-start !important;
         align-items: center !important;
-        padding: 1rem 0 !important;
+        padding: 1.5rem 0 !important;
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
         border-radius: 0 0 20px 20px !important;
         max-height: 0;
         overflow: hidden;
         opacity: 0;
         transform: translateY(-20px) scale(0.95);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         z-index: 999;
     }
 
@@ -1539,14 +1539,19 @@ section {
     .nav-link {
         color: #ffffff !important;
         text-decoration: none !important;
-        font-size: 1rem !important;
-        font-weight: 500 !important;
-        margin: 0.8rem 0 !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+        margin: 1rem 0 !important;
+        padding: 0.8rem 1.5rem !important;
         transition: all 0.3s ease !important;
         position: relative !important;
         opacity: 0;
         transform: translateY(20px);
         animation: slideInUp 0.5s ease forwards;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .nav-menu.active .nav-link {
@@ -1559,6 +1564,14 @@ section {
     .nav-menu.active .nav-link:nth-child(3) { animation-delay: 0.3s; }
     .nav-menu.active .nav-link:nth-child(4) { animation-delay: 0.4s; }
     .nav-menu.active .nav-link:nth-child(5) { animation-delay: 0.5s; }
+
+    .nav-link:hover {
+        background: rgba(255, 255, 255, 0.15) !important;
+        border-color: rgba(255, 255, 255, 0.3) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3) !important;
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.5) !important;
+    }
 
     .nav-toggle {
         display: flex;
